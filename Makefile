@@ -1,4 +1,4 @@
-.PHONY: tests
+.PHONY: tests install fixtures database prepare tests phpstan php-cs-fixer composer-valid doctrine fix analyse
 
 install:
 	cp .env.dist .env.$(env).local
