@@ -23,7 +23,7 @@ class Rule
     #[Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[Column(type: RuleStateType::NAME, length: 9)]
+    #[Column(type: RuleStateType::NAME, length: 10)]
     private RuleState $state = RuleState::Draft;
 
     #[Column(type: Types::STRING)]

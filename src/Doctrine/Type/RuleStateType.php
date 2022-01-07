@@ -17,24 +17,18 @@ final class RuleStateType extends StringType
         return self::NAME;
     }
 
-    /**
-     * @param RuleState|null $value
-     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
-        if (null === $value) {
+        if (!$value instanceof RuleState) {
             return null;
         }
 
         return $value->value;
     }
 
-    /**
-     * @param string|null $value
-     */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?RuleState
     {
-        if (null === $value) {
+        if (!is_string($value)) {
             return null;
         }
 
