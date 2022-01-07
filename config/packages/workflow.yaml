@@ -1,2 +1,31 @@
 framework:
-    workflows: null
+    workflows:
+        rule:
+            type: state_machine
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: method
+                property: scalarState
+            supports:
+                - App\Entity\Rule
+            initial_marking: draft
+            places:
+                - draft
+                - in_review
+                - under_vote
+                - rejected
+                - accepted
+            transistions:
+                review:
+                    from: [draft, under_vote]
+                    to: in_review
+                vote:
+                    from: in_review
+                    to: under_vote
+                reject:
+                    from: under_vote
+                    to: rejected
+                accept:
+                    from: under_vote
+                    to: accepted

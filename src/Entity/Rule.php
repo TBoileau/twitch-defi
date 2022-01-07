@@ -107,4 +107,14 @@ class Rule
     {
         $this->updatedAt = $updatedAt;
     }
+
+    public function setScalarState(string $state): void
+    {
+        $this->state = RuleState::from($state);
+    }
+
+    public function getScalarState(): string
+    {
+        return $this->state->value;
+    }
 }
