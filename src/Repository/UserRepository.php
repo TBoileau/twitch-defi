@@ -11,6 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @template-extends ServiceEntityRepository<User>
+ *
+ * @template-implements UserGateway<User>
  */
 final class UserRepository extends ServiceEntityRepository implements UserGateway
 {

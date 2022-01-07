@@ -26,6 +26,9 @@ final class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * @param UserGateway<User> $userGateway
+     */
     #[Route('/registration', name: 'registration')]
     public function registration(
         Request $request,
