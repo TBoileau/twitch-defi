@@ -18,4 +18,10 @@ final class UserRepository extends ServiceEntityRepository implements UserGatewa
     {
         parent::__construct($registry, User::class);
     }
+
+    public function create(User $user): void
+    {
+        $this->_em->persist($user);
+        $this->_em->flush($user);
+    }
 }
