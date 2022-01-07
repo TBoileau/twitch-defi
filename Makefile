@@ -24,6 +24,12 @@ prepare:
 tests:
 	php bin/phpunit --testdox
 
+eslint:
+	npx eslint assets/
+
+stylelint:
+	npx stylelint "assets/styles/**/*.scss"
+
 phpstan:
 	php vendor/bin/phpstan analyse -c phpstan.neon src --no-progress
 
@@ -36,6 +42,17 @@ composer-valid:
 doctrine:
 	php bin/console doctrine:schema:valid --skip-sync
 
-fix: php-cs-fixer
+twig:
+	php bin/console lint:twig templates
 
-analyse: composer-valid doctrine phpstan
+yaml:
+	php bin/console lint:yaml config translations
+
+container:
+	php bin/console lint:container
+
+fix: php-cs-fixer
+	npx eslint assets/ --fix
+	npx stylelint "assets/styles/**/*.scss" --fix
+
+analyse: eslint stylelint twig yaml composer-valid container doctrine phpstan
