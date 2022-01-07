@@ -16,7 +16,7 @@ framework:
                 - under_vote
                 - rejected
                 - accepted
-            transistions:
+            transitions:
                 review:
                     from: [draft, under_vote]
                     to: in_review

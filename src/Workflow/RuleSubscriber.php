@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Workflow;
 
-use App\Entity\Rule;
 use App\Entity\RuleState;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
