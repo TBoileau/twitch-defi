@@ -7,6 +7,8 @@ install:
 	sed -i -e 's/ENV/$(env)/' .env.$(env).local
 	composer install
 	make prepare env=$(env)
+	yarn install
+	yarn run dev
 
 fixtures:
 	php bin/console doctrine:fixtures:load -n --env=$(env)
