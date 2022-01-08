@@ -46,16 +46,16 @@ class Rule
     private DateTimeImmutable $updatedAt;
 
     /**
-     * @var Collection<int, Vote>
+     * @var Collection<int, Ballot>
      */
-    #[OneToMany(mappedBy: 'rule', targetEntity: Vote::class)]
-    private Collection $votes;
+    #[OneToMany(mappedBy: 'rule', targetEntity: Ballot::class)]
+    private Collection $ballots;
 
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
-        $this->votes = new ArrayCollection();
+        $this->ballots = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,10 +129,10 @@ class Rule
     }
 
     /**
-     * @return Collection<int, Vote>
+     * @return Collection<int, Ballot>
      */
-    public function getVotes(): Collection
+    public function getBallots(): Collection
     {
-        return $this->votes;
+        return $this->ballots;
     }
 }
