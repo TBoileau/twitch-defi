@@ -91,11 +91,6 @@ class Review
         return $this->publishedAt;
     }
 
-    public function setPublishedAt(DateTimeImmutable $publishedAt): void
-    {
-        $this->publishedAt = $publishedAt;
-    }
-
     public function getContent(): string
     {
         return $this->content;
