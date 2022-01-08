@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Doctrine\Type\VoteStatusType;
 use App\Repository\VoteRepository;
 use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 #[Entity(repositoryClass: VoteRepository::class)]
@@ -26,32 +23,23 @@ class Vote
     #[Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ManyToOne(targetEntity: Rule::class, inversedBy: 'votes')]
+    #[ManyToOne(targetEntity: Ballot::class, inversedBy: 'votes')]
     #[JoinColumn(nullable: false)]
-    private Rule $rule;
+    private Ballot $ballot;
+
+    #[ManyToOne(targetEntity: User::class)]
+    #[JoinColumn(nullable: false)]
+    private User $voter;
 
     #[Column(type: Types::DATETIME_IMMUTABLE)]
-    private DateTimeImmutable $createdAt;
+    private DateTimeImmutable $votedAt;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ManyToMany(targetEntity: User::class)]
-    #[JoinTable(name: 'rule_up_votes')]
-    private Collection $upVotes;
-
-    /**
-     * @var Collection<int, User>
-     */
-    #[ManyToMany(targetEntity: User::class)]
-    #[JoinTable(name: 'rule_down_votes')]
-    private Collection $downVotes;
+    #[Column(type: VoteStatusType::NAME)]
+    private VoteStatus $status;
 
     public function __construct()
     {
-        $this->createdAt = new DateTimeImmutable();
-        $this->upVotes = new ArrayCollection();
-        $this->downVotes = new ArrayCollection();
+        $this->votedAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -59,34 +47,38 @@ class Vote
         return $this->id;
     }
 
-    public function getRule(): Rule
+    public function getBallot(): Ballot
     {
-        return $this->rule;
+        return $this->ballot;
     }
 
-    public function setRule(Rule $rule): void
+    public function setBallot(Ballot $ballot): void
     {
-        $this->rule = $rule;
+        $this->ballot = $ballot;
     }
 
-    public function getCreatedAt(): DateTimeImmutable
+    public function getVoter(): User
     {
-        return $this->createdAt;
+        return $this->voter;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUpVotes(): Collection
+    public function setVoter(User $voter): void
     {
-        return $this->upVotes;
+        $this->voter = $voter;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getDownVotes(): Collection
+    public function getVotedAt(): DateTimeImmutable
     {
-        return $this->downVotes;
+        return $this->votedAt;
+    }
+
+    public function getStatus(): VoteStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(VoteStatus $status): void
+    {
+        $this->status = $status;
     }
 }
