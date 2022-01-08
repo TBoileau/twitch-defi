@@ -7,6 +7,8 @@ namespace App\Entity;
 use App\Doctrine\Type\RuleStateType;
 use App\Repository\RuleRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -14,6 +16,7 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 
 #[Entity(repositoryClass: RuleRepository::class)]
 class Rule
@@ -42,10 +45,17 @@ class Rule
     #[Column(type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $updatedAt;
 
+    /**
+     * @var Collection<int, Vote>
+     */
+    #[OneToMany(mappedBy: 'rule', targetEntity: Vote::class)]
+    private Collection $votes;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
+        $this->votes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,5 +126,13 @@ class Rule
     public function getScalarState(): string
     {
         return $this->state->value;
+    }
+
+    /**
+     * @return Collection<int, Vote>
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
     }
 }
