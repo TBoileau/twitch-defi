@@ -31,9 +31,9 @@ final class RegistrationTypeTest extends TypeTestCase
         $expectedUser->setPlainPassword('password');
 
         $formView = $form->createView();
-        $this->assertArrayHasKey('nickname', $formView->children);
-        $this->assertArrayHasKey('email', $formView->children);
-        $this->assertArrayHasKey('plainPassword', $formView->children);
+        self::assertArrayHasKey('nickname', $formView->children);
+        self::assertArrayHasKey('email', $formView->children);
+        self::assertArrayHasKey('plainPassword', $formView->children);
 
         $form->submit($formData);
         self::assertTrue($form->isSynchronized());
