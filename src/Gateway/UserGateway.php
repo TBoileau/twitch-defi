@@ -6,6 +6,9 @@ namespace App\Gateway;
 
 use App\Entity\User;
 
+/**
+ * @template T
+ */
 interface UserGateway
 {
     public function create(User $user): void;
