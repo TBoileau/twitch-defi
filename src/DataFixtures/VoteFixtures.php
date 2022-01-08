@@ -69,6 +69,8 @@ final class VoteFixtures extends Fixture implements DependentFixtureInterface
         $ballot = new Ballot();
         $ballot->setRule($rule);
 
+        $rule->setCurrentBallot($ballot);
+
         if (RuleState::UnderVote !== $rule->getState()) {
             $ballot->setFinishedAt(new DateTimeImmutable());
         }

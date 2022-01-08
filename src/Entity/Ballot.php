@@ -8,6 +8,7 @@ use App\Repository\BallotRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -92,5 +93,14 @@ class Ballot
     public function getVotes(): Collection
     {
         return $this->votes;
+    }
+
+    public function hasVote(?User $voter): bool
+    {
+        $criteria = Criteria::create();
+
+        $criteria->where(Criteria::expr()->eq('voter', $voter));
+
+        return 1 === $this->votes->matching($criteria)->count();
     }
 }

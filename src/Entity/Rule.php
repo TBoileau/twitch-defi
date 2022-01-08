@@ -51,6 +51,12 @@ class Rule
     #[OneToMany(mappedBy: 'rule', targetEntity: Ballot::class)]
     private Collection $ballots;
 
+    #[ManyToOne(targetEntity: Ballot::class)]
+    private ?Ballot $currentBallot = null;
+
+    #[ManyToOne(targetEntity: Ballot::class)]
+    private ?Ballot $decisiveBallot = null;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -134,5 +140,29 @@ class Rule
     public function getBallots(): Collection
     {
         return $this->ballots;
+    }
+
+    public function getCurrentBallot(): ?Ballot
+    {
+        return $this->currentBallot;
+    }
+
+    public function setCurrentBallot(?Ballot $currentBallot): void
+    {
+        $this->currentBallot = $currentBallot;
+
+        if (null !== $this->currentBallot) {
+            $this->ballots->add($this->currentBallot);
+        }
+    }
+
+    public function getDecisiveBallot(): ?Ballot
+    {
+        return $this->decisiveBallot;
+    }
+
+    public function setDecisiveBallot(?Ballot $decisiveBallot): void
+    {
+        $this->decisiveBallot = $decisiveBallot;
     }
 }
