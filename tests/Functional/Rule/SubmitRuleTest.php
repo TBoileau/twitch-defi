@@ -7,7 +7,6 @@ namespace App\Tests\Functional\Rule;
 use App\Entity\Rule;
 use App\Entity\RuleState;
 use App\Repository\RuleRepository;
-use App\Repository\UserRepository;
 use App\Tests\Functional\AuthenticatedClientTrait;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -56,7 +55,7 @@ final class SubmitRuleTest extends WebTestCase
         self::assertRouteSame('home');
 
         /**
-         * @var UserRepository $userRepository
+         * @var RuleRepository $ruleRepository
          * @phpstan-ignore-next-line
          */
         $ruleRepository = $client->getContainer()->get(RuleRepository::class);
