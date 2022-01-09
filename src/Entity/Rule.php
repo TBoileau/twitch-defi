@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[Entity(repositoryClass: RuleRepository::class)]
 class Rule
@@ -30,9 +31,11 @@ class Rule
     private RuleState $state = RuleState::Draft;
 
     #[Column(type: Types::STRING)]
+    #[NotBlank]
     private string $name;
 
     #[Column(type: Types::TEXT)]
+    #[NotBlank]
     private string $description;
 
     #[ManyToOne(targetEntity: User::class)]
