@@ -1,0 +1,107 @@
+.flow-root {
+  @apply py-5;
+
+  > .flow-root-list {
+    @apply -mb-8;
+
+    > .flow-root-item {
+      &:last-child {
+        > div {
+          > span {
+            @apply hidden;
+          }
+        }
+      }
+
+      > div {
+        @apply relative pb-8;
+
+        > span {
+          @apply absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200;
+        }
+
+        > div {
+          @apply relative flex items-start space-x-3;
+        }
+
+        &.comment {
+          > div {
+            > .comment-avatar {
+              @apply relative;
+
+              > img {
+                @apply h-10 w-10 rounded-full bg-white flex items-center justify-center ring-8 ring-gray-100;
+              }
+
+              > span {
+                @apply absolute -bottom-0.5 -right-1 bg-gray-100 rounded-tl px-0.5 py-px;
+
+                > svg {
+                  @apply h-5 w-5 text-gray-400;
+                }
+              }
+            }
+
+            > .comment-body {
+              @apply min-w-0 flex-1;
+
+              > .comment-metadata {
+                @apply mt-2 text-sm text-gray-700;
+
+                > .comment-author {
+                  @apply text-sm;
+
+                  > a {
+                    @apply font-medium text-gray-900;
+                  }
+                }
+
+                > .comment-date {
+                  @apply mt-0.5 text-sm text-gray-500;
+                }
+              }
+
+              > .comment-content {
+                @apply mt-2 text-sm text-gray-700;
+              }
+            }
+          }
+        }
+
+        &.history {
+          > div {
+            > .history-icon {
+              > div {
+                @apply relative px-1;
+
+                > div {
+                  @apply h-8 w-8 bg-white rounded-full ring-8 ring-gray-100 flex items-center justify-center;
+
+                  > svg {
+                    @apply h-5 w-5 text-gray-500;
+                  }
+                }
+              }
+            }
+
+            > .history-content {
+              @apply min-w-0 flex-1 py-1.5;
+
+              > div {
+                @apply text-sm text-gray-500;
+
+                a {
+                  @apply font-medium text-gray-900;
+                }
+
+                span {
+                  @apply whitespace-nowrap;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

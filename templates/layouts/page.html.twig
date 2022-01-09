@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="page">
+        {{ include('components/breadcrumb.html.twig', {items: {'Liste des règles': '/', 'Nom de la règle': path('rule_show')}}) }}
+        <div class="page-header">
+            <div class="page-title">
+                <h1>{% block page_title %}{% endblock %}</h1>
+            </div>
+            <div class="page-actions">
+                {% block page_actions %}{% endblock %}
+            </div>
+        </div>
+        <div class="page-body">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

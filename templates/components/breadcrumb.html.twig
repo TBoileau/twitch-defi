@@ -1,0 +1,27 @@
+{% import "components/icons.html.twig" as icons %}
+
+<div class="breadcrumb">
+    <nav class="breadcrumb-mobile" aria-label="Retour">
+        <a href="#">
+            {{ icons.chevron_left() }}
+            Retour
+        </a>
+    </nav>
+    <nav class="breadcrumb-desktop" aria-label="Breadcrumb">
+        <ol role="list" class="breadcrumb-list">
+            <li class="breadcrumb-item">
+                <div>
+                    <a href="{{ path('home') }}">Accueil</a>
+                </div>
+            </li>
+            {% for label, path in items %}
+                <li class="breadcrumb-item">
+                    <div>
+                        {{ icons.chevron_right() }}
+                        <a href="{{ path }}">{{ label }}</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+    </nav>
+</div>

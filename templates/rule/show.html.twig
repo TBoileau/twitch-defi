@@ -1,0 +1,120 @@
+{% extends 'layouts/page.html.twig' %}
+
+{% block page_title %}Nom de la règle{% endblock %}
+
+{% block page_actions %}
+    <a href="#" class="btn">Modifier</a>
+    <a href="#" class="btn">Proposer</a>
+{% endblock %}
+
+{% block content %}
+    {% import "components/icons.html.twig" as icons %}
+
+    <div class="rule-show">
+        <div class="rule-show-header">
+            <h2>Informations</h2>
+            <p>
+                Règle détaillée et système de points
+            </p>
+        </div>
+        <div class="rule-show-body">
+            <dl class="description-list">
+                <div class="description-item">
+                    <dt>Auteur</dt>
+                    <dd>John Doe</dd>
+                </div>
+                <div class="description-item">
+                    <dt>État</dt>
+                    <dd>
+                        <span class="badge">
+                          Brouillon
+                        </span>
+                    </dd>
+                </div>
+                <div class="description-item">
+                    <dt>Date de création</dt>
+                    <dd>10/10/2022 10:10</dd>
+                </div>
+                <div class="description-item">
+                    <dt>Dernière mise à jour</dt>
+                    <dd>10/10/2022 10:10</dd>
+                </div>
+                <div class="description-item description-item-full">
+                    <dt>Description</dt>
+                    <dd>
+                        Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
+                    </dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+    <div class="flow-root">
+        <ul role="list" class="flow-root-list">
+            <li class="flow-root-item">
+                <div class="comment">
+                    <span aria-hidden="true"></span>
+                    <div>
+                        <div class="comment-avatar">
+                            <img src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="">
+                            <span>
+                                {{ icons.chat_alt() }}
+                            </span>
+                        </div>
+                        <div class="comment-body">
+                            <div class="comment-metadata">
+                                <div class="comment-author">
+                                    <a href="#">Eduardo Benz</a>
+                                </div>
+                                <p class="comment-date">
+                                    Commented 6d ago
+                                </p>
+                            </div>
+                            <div class="comment-content">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="flow-root-item">
+                <div class="history">
+                    <span aria-hidden="true"></span>
+                    <div>
+                        <div class="history-icon">
+                            <div>
+                                <div>
+                                    {{ icons.user_circle() }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="history-content">
+                            <div>
+                                <a href="#">Hilary Mahy</a>
+                                assigned
+                                <a href="#">Kristin Watson</a>
+                                <span>2d ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <form class="form">
+        <div class="form-group">
+            <div>
+                <textarea id="_username" name="_username" required placeholder="Laissez un commentaire" class="form-control"></textarea>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn">
+                Commenter
+            </button>
+        </div>
+    </form>
+{% endblock %}

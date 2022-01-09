@@ -21,6 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[IsGranted('ROLE_USER')]
 final class RuleController extends AbstractController
 {
+    #[Route('/show', name: 'show')]
+    public function show(): Response
+    {
+        return $this->render('rule/show.html.twig');
+    }
+
     /**
      * @param RuleGateway<User> $ruleGateway
      */

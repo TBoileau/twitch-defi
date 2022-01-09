@@ -1,0 +1,49 @@
+.page-body {
+  @apply max-w-3xl mx-auto;
+
+  .rule-show {
+    @apply my-5 bg-white shadow overflow-hidden sm:rounded-lg;
+
+    > .rule-show-header {
+      @apply px-4 py-5 sm:px-6;
+
+      > h2 {
+        @apply text-lg leading-6 font-medium text-gray-900;
+      }
+
+      > p {
+        @apply mt-1 max-w-2xl text-sm text-gray-500;
+      }
+    }
+
+    > .rule-show-body {
+      @apply border-t border-gray-200 px-4 py-5 sm:px-6;
+
+      > .description-list {
+        @apply grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2;
+
+        > .description-item {
+          @apply sm:col-span-1;
+
+          &-full {
+            @apply sm:col-span-2;
+          }
+
+          > dt {
+            @apply text-sm font-medium text-gray-500;
+          }
+
+          > dd {
+            @apply mt-1 text-sm text-gray-900;
+          }
+        }
+      }
+    }
+  }
+
+  .form {
+    > div:last-child {
+      @apply flex justify-end;
+    }
+  }
+}

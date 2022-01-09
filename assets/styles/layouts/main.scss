@@ -1,0 +1,33 @@
+main {
+  @apply bg-gray-100 py-4;
+
+  > .page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+
+    > .page-header {
+      @apply mt-2 md:flex md:items-center md:justify-between;
+
+      > .page-title {
+        @apply flex-1 min-w-0;
+
+        > h1 {
+          @apply text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate;
+        }
+      }
+
+      > .page-actions {
+        @apply mt-4 flex-shrink-0 flex md:mt-0 md:ml-4;
+
+        > .btn {
+          &:not(:first-child) {
+            @apply ml-3;
+          }
+        }
+      }
+    }
+
+    > .page-body {
+      @apply py-5;
+    }
+  }
+}
