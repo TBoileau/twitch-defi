@@ -9,6 +9,10 @@
 
       > a {
         @apply text-gray-400 hover:text-gray-500;
+
+        > svg {
+          @apply h-6 w-6;
+        }
       }
     }
 
