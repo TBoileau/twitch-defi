@@ -11,5 +11,7 @@ use App\Entity\Rule;
  */
 interface RuleGateway
 {
-    public function create(Rule $rule): void;
+    public function submit(Rule $rule): void;
+
+    public function update(Rule $rule): void;
 }

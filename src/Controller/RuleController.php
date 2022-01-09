@@ -8,6 +8,8 @@ use App\Entity\Rule;
 use App\Entity\User;
 use App\Form\RuleType;
 use App\Gateway\RuleGateway;
+use App\Security\Voter\UpdateRuleVoter;
+use DateTimeImmutable;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,11 +38,29 @@ final class RuleController extends AbstractController
 
         $form = $this->createForm(RuleType::class, $rule)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $ruleGateway->create($rule);
+            $ruleGateway->submit($rule);
 
             return $this->redirectToRoute('home');
         }
 
         return $this->renderForm('rule/submit.html.twig', ['form' => $form]);
+    }
+
+    /**
+     * @param RuleGateway<User> $ruleGateway
+     */
+    #[Route('/{id}/update', name: 'update', requirements: ['id' => '\d+'])]
+    #[IsGranted(UpdateRuleVoter::NAME, subject: 'rule')]
+    public function update(Rule $rule, Request $request, RuleGateway $ruleGateway): Response
+    {
+        $form = $this->createForm(RuleType::class, $rule)->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rule->setUpdatedAt(new DateTimeImmutable());
+            $ruleGateway->update($rule);
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->renderForm('rule/update.html.twig', ['form' => $form]);
     }
 }

@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    <div>
+        <button type="submit" class="btn btn-block">{{ action }}</button>
+    </div>
+{{ form_end(form) }}

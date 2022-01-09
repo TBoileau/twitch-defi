@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class SubmitRuleTest extends WebTestCase
+final class UpdateRuleTest extends WebTestCase
 {
     use AuthenticatedClientTrait;
 
@@ -24,7 +24,7 @@ final class SubmitRuleTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $client->request(Request::METHOD_GET, '/rules/submit');
+        $client->request(Request::METHOD_GET, '/rules/1/update');
 
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
@@ -36,17 +36,50 @@ final class SubmitRuleTest extends WebTestCase
     /**
      * @test
      */
-    public function shouldSubmitRule(): void
+    public function shouldRaiseAnAccessDeniedExceptionWhenLoggedUserIdDifferentOfRulesAuthor(): void
     {
         $client = self::createAuthenticatedClient();
 
-        $client->request(Request::METHOD_GET, '/rules/submit');
+        $client->request(Request::METHOD_GET, '/rules/6/update');
+
+        self::assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldRaiseAnAccessDeniedExceptionWhenRulesAuthorTryToUpdatePublishedRule(): void
+    {
+        $client = self::createAuthenticatedClient();
+
+        $client->request(Request::METHOD_GET, '/rules/4/update');
+
+        self::assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldUpdateRule(): void
+    {
+        $client = self::createAuthenticatedClient();
+
+        /**
+         * @var RuleRepository $ruleRepository
+         * @phpstan-ignore-next-line
+         */
+        $ruleRepository = $client->getContainer()->get(RuleRepository::class);
+
+        /** @var Rule $rule */
+        $rule = $ruleRepository->find(1);
+
+        $client->request(Request::METHOD_GET, sprintf('/rules/%d/update', $rule->getId()));
 
         self::assertResponseIsSuccessful();
 
         $formData = $this->createData();
 
-        $client->submitForm('Soumettre', $formData);
+        $client->submitForm('Modifier', $formData);
 
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
@@ -60,10 +93,10 @@ final class SubmitRuleTest extends WebTestCase
          */
         $ruleRepository = $client->getContainer()->get(RuleRepository::class);
 
-        self::assertEquals(51, $ruleRepository->count([]));
+        self::assertEquals(50, $ruleRepository->count([]));
 
         /** @var Rule $rule */
-        $rule = $ruleRepository->findOneBy([], ['id' => 'desc']);
+        $rule = $ruleRepository->find(1);
 
         self::assertEquals($formData['rule[name]'], $rule->getName());
         self::assertEquals($formData['rule[description]'], $rule->getDescription());
@@ -81,7 +114,7 @@ final class SubmitRuleTest extends WebTestCase
      *
      * @dataProvider provideInvalidData
      */
-    public function shouldNotSubmitRuleDueToInvalidData(array $formData): void
+    public function shouldNotUpdateRuleDueToInvalidData(array $formData): void
     {
         $client = self::createAuthenticatedClient();
 
@@ -111,8 +144,8 @@ final class SubmitRuleTest extends WebTestCase
     private function createData(array $extra = []): array
     {
         return $extra + [
-            'rule[name]' => 'name',
-            'rule[description]' => 'description',
+            'rule[name]' => 'updated name',
+            'rule[description]' => 'updated description',
         ];
     }
 }

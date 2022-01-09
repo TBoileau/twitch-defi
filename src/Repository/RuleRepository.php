@@ -21,9 +21,14 @@ final class RuleRepository extends ServiceEntityRepository implements RuleGatewa
         parent::__construct($registry, Rule::class);
     }
 
-    public function create(Rule $rule): void
+    public function submit(Rule $rule): void
     {
         $this->_em->persist($rule);
+        $this->_em->flush($rule);
+    }
+
+    public function update(Rule $rule): void
+    {
         $this->_em->flush($rule);
     }
 }
