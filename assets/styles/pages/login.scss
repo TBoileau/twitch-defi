@@ -1,0 +1,11 @@
+.login-options {
+  @apply flex items-center justify-between;
+
+  > .forgotten-password {
+    @apply text-sm;
+
+    > a {
+      @apply font-medium text-indigo-600 hover:text-indigo-500;
+    }
+  }
+}

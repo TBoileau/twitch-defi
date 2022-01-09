@@ -1,0 +1,53 @@
+.form {
+  @apply space-y-6;
+}
+
+.form-check {
+  @apply flex items-center;
+
+  > .form-control {
+    @apply h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300;
+
+    &[type="checkbox"] {
+      @apply rounded;
+    }
+  }
+
+  > .form-label {
+    @apply ml-2 block text-sm text-gray-900;
+  }
+}
+
+.form-group {
+  .form-label {
+    @apply block text-sm font-medium text-gray-700;
+  }
+
+  > div {
+    @apply mt-1;
+
+    &.is-invalid {
+      @apply relative rounded-md shadow-sm;
+    }
+
+    > .form-control {
+      @apply shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md;
+    }
+
+    > .form-icon {
+      @apply absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none;
+
+      > svg {
+        @apply text-red-500;
+      }
+    }
+  }
+
+  > .form-help {
+    @apply mt-2 text-sm text-gray-500;
+  }
+
+  > .form-errors {
+    @apply mt-2 text-sm text-red-600;
+  }
+}
