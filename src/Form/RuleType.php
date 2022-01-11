@@ -6,6 +6,7 @@ namespace App\Form;
 
 use App\Entity\Rule;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,6 +27,12 @@ final class RuleType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'empty_data' => '',
+            ])
+            ->add('scorings', CollectionType::class, [
+                'entry_type' => ScoringTypeType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ]);
     }
 
