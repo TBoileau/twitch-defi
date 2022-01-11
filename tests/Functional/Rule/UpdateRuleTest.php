@@ -64,10 +64,7 @@ final class UpdateRuleTest extends WebTestCase
     {
         $client = self::createAuthenticatedClient();
 
-        /**
-         * @var RuleRepository $ruleRepository
-         * @phpstan-ignore-next-line
-         */
+        /** @var RuleRepository $ruleRepository */
         $ruleRepository = $client->getContainer()->get(RuleRepository::class);
 
         /** @var Rule $rule */
@@ -87,10 +84,7 @@ final class UpdateRuleTest extends WebTestCase
 
         self::assertRouteSame('home');
 
-        /**
-         * @var RuleRepository $ruleRepository
-         * @phpstan-ignore-next-line
-         */
+        /** @var RuleRepository $ruleRepository */
         $ruleRepository = $client->getContainer()->get(RuleRepository::class);
 
         self::assertEquals(50, $ruleRepository->count([]));
