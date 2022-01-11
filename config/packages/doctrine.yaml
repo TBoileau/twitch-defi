@@ -4,6 +4,7 @@ doctrine:
         types:
             rule_state: App\Doctrine\Type\RuleStateType
             vote_status: App\Doctrine\Type\VoteStatusType
+            scoring_type: App\Doctrine\Type\ScoringTypeType
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware

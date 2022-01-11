@@ -17,7 +17,9 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Valid;
 
 #[Entity(repositoryClass: RuleRepository::class)]
 class Rule
@@ -49,6 +51,14 @@ class Rule
     private DateTimeImmutable $updatedAt;
 
     /**
+     * @var Collection<int, Scoring>
+     */
+    #[OneToMany(mappedBy: 'rule', targetEntity: Scoring::class, cascade: ['persist'])]
+    #[Valid]
+    #[Count(min: 1)]
+    private Collection $scorings;
+
+    /**
      * @var Collection<int, Ballot>
      */
     #[OneToMany(mappedBy: 'rule', targetEntity: Ballot::class)]
@@ -65,6 +75,7 @@ class Rule
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
         $this->ballots = new ArrayCollection();
+        $this->scorings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,5 +178,28 @@ class Rule
     public function setDecisiveBallot(?Ballot $decisiveBallot): void
     {
         $this->decisiveBallot = $decisiveBallot;
+    }
+
+    /**
+     * @return Collection<int, Scoring>
+     */
+    public function getScorings(): Collection
+    {
+        return $this->scorings;
+    }
+
+    public function addScoring(Scoring $scoring): void
+    {
+        if (!$this->scorings->contains($scoring)) {
+            $scoring->setRule($this);
+            $this->scorings->add($scoring);
+        }
+    }
+
+    public function removeScoring(Scoring $scoring): void
+    {
+        if ($this->scorings->contains($scoring)) {
+            $this->scorings->removeElement($scoring);
+        }
     }
 }
