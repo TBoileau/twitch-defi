@@ -6,7 +6,7 @@ namespace App\Entity;
 
 enum VoteStatus: string
 {
-    case REVIEW = 'review';
-    case ACCEPT = 'accept';
-    case REJECT = 'reject';
+    case Review = 'review';
+    case Accept = 'accept';
+    case Reject = 'reject';
 }

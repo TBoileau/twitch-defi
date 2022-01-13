@@ -91,7 +91,7 @@ final class RuleTest extends ValidationTestCase
             $scoring = new Scoring();
             $scoring->setPoints($scoringPoints);
             $scoring->setLabel($scoringLabel);
-            $scoring->setType(ScoringType::BONUS);
+            $scoring->setType(ScoringType::Bonus);
 
             $frequency = new Frequency();
             $frequency->setValue($frequencyValue);

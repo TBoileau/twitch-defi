@@ -29,7 +29,7 @@ final class RuleType extends AbstractType
                 'empty_data' => '',
             ])
             ->add('scorings', CollectionType::class, [
-                'entry_type' => ScoringTypeType::class,
+                'entry_type' => ScoringType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

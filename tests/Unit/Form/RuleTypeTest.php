@@ -25,7 +25,7 @@ final class RuleTypeTest extends TypeTestCase
             'description' => 'Description',
             'scorings' => [
                 [
-                    'type' => ScoringType::BONUS->value,
+                    'type' => ScoringType::Bonus->value,
                     'label' => 'Scoring',
                     'points' => 10,
                     'frequency' => [
@@ -47,7 +47,7 @@ final class RuleTypeTest extends TypeTestCase
         $scoring = new Scoring();
         $scoring->setPoints(10);
         $scoring->setLabel('Scoring');
-        $scoring->setType(ScoringType::BONUS);
+        $scoring->setType(ScoringType::Bonus);
 
         $frequency = new Frequency();
         $frequency->setValue(10);

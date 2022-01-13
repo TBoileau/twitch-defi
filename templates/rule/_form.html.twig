@@ -1,8 +1,19 @@
 {{ form_start(form) }}
     {{ form_errors(form) }}
+    {{ form_widget(form._token) }}
     {{ form_row(form.name) }}
     {{ form_row(form.description) }}
+    <button type="button" class="btn collection-add" data-target="{{ form.scorings.vars.id }}">Ajouter</button>
+    <div class="collection"
+         id="{{ form.scorings.vars.id }}"
+         data-index="{{ form.scorings|length == 0 ? 0 : form.scorings|last.vars.name|number_format + 1 }}"
+         data-prototype="{{ include('rule/_scoring.html.twig', {form: form.scorings.vars.prototype})|e('html_attr') }}"
+    >
+        {% for scoring in form.scorings %}
+            {{ include('rule/_scoring.html.twig', {form: scoring}) }}
+        {% endfor %}
+    </div>
     <div>
         <button type="submit" class="btn btn-block">{{ action }}</button>
     </div>
-{{ form_end(form) }}
+{{ form_end(form, {render_rest: false}) }}

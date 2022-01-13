@@ -208,7 +208,7 @@ final class UpdateRuleTest extends WebTestCase
                 'description' => 'Description',
                 'scorings' => [
                     [
-                        'type' => ScoringType::BONUS->value,
+                        'type' => ScoringType::Bonus->value,
                         'label' => 'Scoring',
                         'points' => 10,
                         'frequency' => [

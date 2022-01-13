@@ -77,19 +77,19 @@ final class VoteFixtures extends Fixture implements DependentFixtureInterface
 
         $votersByRuleStateAndVoteStatus = [
             RuleState::Accepted->value => [
-                VoteStatus::ACCEPT->value => array_slice($users, 0, 6),
-                VoteStatus::REJECT->value => array_slice($users, 6, 2),
-                VoteStatus::REVIEW->value => array_slice($users, 8, 2),
+                VoteStatus::Accept->value => array_slice($users, 0, 6),
+                VoteStatus::Reject->value => array_slice($users, 6, 2),
+                VoteStatus::Review->value => array_slice($users, 8, 2),
             ],
             RuleState::Rejected->value => [
-                VoteStatus::ACCEPT->value => array_slice($users, 0, 2),
-                VoteStatus::REJECT->value => array_slice($users, 2, 6),
-                VoteStatus::REVIEW->value => array_slice($users, 8, 2),
+                VoteStatus::Accept->value => array_slice($users, 0, 2),
+                VoteStatus::Reject->value => array_slice($users, 2, 6),
+                VoteStatus::Review->value => array_slice($users, 8, 2),
             ],
             RuleState::UnderVote->value => [
-                VoteStatus::ACCEPT->value => array_slice($users, 0, 2),
-                VoteStatus::REJECT->value => array_slice($users, 2, 2),
-                VoteStatus::REVIEW->value => array_slice($users, 4, 2),
+                VoteStatus::Accept->value => array_slice($users, 0, 2),
+                VoteStatus::Reject->value => array_slice($users, 2, 2),
+                VoteStatus::Review->value => array_slice($users, 4, 2),
             ],
         ];
 

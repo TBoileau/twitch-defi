@@ -6,6 +6,14 @@ namespace App\Entity;
 
 enum ScoringType: string
 {
-    case BONUS = 'bonus';
-    case PENALTY = 'penalty';
+    case Bonus = 'bonus';
+    case Penalty = 'penalty';
+
+    public function label(): string
+    {
+        return match($this) {
+            self::Bonus => 'Bonus',
+            self::Penalty => 'Pénalité',
+        };
+    }
 }

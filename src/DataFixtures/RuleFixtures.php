@@ -53,7 +53,7 @@ final class RuleFixtures extends Fixture implements DependentFixtureInterface
         $scoring = new Scoring();
         $scoring->setPoints(10);
         $scoring->setLabel('Scoring');
-        $scoring->setType(ScoringType::BONUS);
+        $scoring->setType(ScoringType::Bonus);
 
         $frequency = new Frequency();
         $frequency->setValue(10);

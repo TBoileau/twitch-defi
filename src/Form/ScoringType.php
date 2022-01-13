@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Entity\Scoring;
-use App\Entity\ScoringType;
+use App\Entity\ScoringType as EntityScoringType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ScoringTypeType extends AbstractType
+final class ScoringType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -29,7 +29,8 @@ final class ScoringTypeType extends AbstractType
             ])
             ->add('type', EnumType::class, [
                 'label' => 'Type',
-                'class' => ScoringType::class,
+                'class' => EntityScoringType::class,
+                'choice_label' => static fn (EntityScoringType $type): string => $type->label(),
             ])
             ->add('frequency', FrequencyType::class, [
                 'label' => null,
