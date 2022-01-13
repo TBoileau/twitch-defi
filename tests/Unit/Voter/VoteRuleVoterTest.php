@@ -86,7 +86,7 @@ final class VoteRuleVoterTest extends TestCase
 
         if (null !== $voter) {
             $vote = new Vote();
-            $vote->setStatus(VoteStatus::REJECT);
+            $vote->setStatus(VoteStatus::Reject);
             $vote->setVoter($voter);
             $ballot->getVotes()->add($vote);
         }

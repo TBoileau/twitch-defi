@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Form;
 
+use App\Entity\Frequency;
 use App\Entity\Rule;
+use App\Entity\Scoring;
+use App\Entity\ScoringType;
 use App\Form\RuleType;
 use DateTimeImmutable;
 use ReflectionProperty;
@@ -20,6 +23,17 @@ final class RuleTypeTest extends TypeTestCase
         $formData = [
             'name' => 'Règle',
             'description' => 'Description',
+            'scorings' => [
+                [
+                    'type' => ScoringType::Bonus->value,
+                    'label' => 'Scoring',
+                    'points' => 10,
+                    'frequency' => [
+                        'value' => 10,
+                        'unity' => 'minute',
+                    ],
+                ],
+            ],
         ];
 
         $rule = new Rule();
@@ -30,9 +44,24 @@ final class RuleTypeTest extends TypeTestCase
         $expectedRule->setDescription('Description');
         $expectedRule->setName('Règle');
 
+        $scoring = new Scoring();
+        $scoring->setPoints(10);
+        $scoring->setLabel('Scoring');
+        $scoring->setType(ScoringType::Bonus);
+
+        $frequency = new Frequency();
+        $frequency->setValue(10);
+        $frequency->setUnity('minute');
+
+        $scoring->setFrequency($frequency);
+
+        $expectedRule->addScoring($scoring);
+
         $formView = $form->createView();
         self::assertArrayHasKey('name', $formView->children);
         self::assertArrayHasKey('description', $formView->children);
+        self::assertArrayHasKey('scorings', $formView->children);
+        self::assertArrayHasKey('prototype', $formView->children['scorings']->vars);
 
         $form->submit($formData);
         self::assertTrue($form->isSynchronized());

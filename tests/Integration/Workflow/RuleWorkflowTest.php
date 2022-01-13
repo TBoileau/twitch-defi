@@ -189,15 +189,15 @@ final class RuleWorkflowTest extends KernelTestCase
         $rule->setCurrentBallot($ballot);
 
         for ($i = 0; $i < $numberOfRejects; ++$i) {
-            $ballot->getVotes()->add(self::createVote(VoteStatus::REJECT));
+            $ballot->getVotes()->add(self::createVote(VoteStatus::Reject));
         }
 
         for ($i = 0; $i < $numberOfAccepts; ++$i) {
-            $ballot->getVotes()->add(self::createVote(VoteStatus::ACCEPT));
+            $ballot->getVotes()->add(self::createVote(VoteStatus::Accept));
         }
 
         for ($i = 0; $i < $numberOfReviews; ++$i) {
-            $ballot->getVotes()->add(self::createVote(VoteStatus::REVIEW));
+            $ballot->getVotes()->add(self::createVote(VoteStatus::Review));
         }
 
         return $rule;
